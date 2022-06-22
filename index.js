@@ -1318,7 +1318,6 @@ var Voc_lib = [
   "mend",
   "merciful",
   "mere",
-  "mess up",
   "messy",
   "metal",
   "mice",
@@ -2558,7 +2557,7 @@ function user(e) {
 
 function enemy(hard) {
   if (sc >= 95 || enemySC[0] >= 95 || enemySC[1] >= 95 || enemySC[2] >= 95) {
-    let wpm = ((60 * wpm_word) / wpm_time* 5) ;
+    let wpm = (60 * wpm_word) / (wpm_time* 5) ;
     if (sc >= 95) {
       if (mode.value == "voc")
         window.alert("you win and your wpm is " + wpm.toFixed(2));
