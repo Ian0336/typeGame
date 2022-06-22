@@ -2542,7 +2542,7 @@ function user(e) {
   if (rand == ans) {
     if (mode.value == "voc") {
       sc += 2;
-      wpm_word += rand.length();
+      wpm_word += rand.length;
     }
     rand = randTopic("lower");
     ans = "";
