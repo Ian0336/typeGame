@@ -11,7 +11,8 @@ var rand = "";
 var sc = 0;
 var enemySC = [0, 0, 0];
 var myInt, totalTime;
-var wpm_word = 0, wpm_time = 0;
+var wpm_word = 0,
+  wpm_time = 0;
 var ans = "";
 var Voc_lib = [
   "aback",
@@ -2539,14 +2540,13 @@ function user(e) {
     ans = e.key;
   }
   if (rand == ans) {
+    if (mode.value == "voc") {
+      sc += 2;
+      wpm_word += rand.length();
+    }
     rand = randTopic("lower");
     ans = "";
     sc = sc + 1;
-    if (mode.value == "voc")
-    {
-      sc += 2;
-      wpm_word++;
-    } 
   } else if (ans != rand.slice(0, ans.length) && e.key != "Backspace") {
     audio.time = 0;
     audio.play();
@@ -2558,19 +2558,16 @@ function user(e) {
 
 function enemy(hard) {
   if (sc >= 95 || enemySC[0] >= 95 || enemySC[1] >= 95 || enemySC[2] >= 95) {
-    let wpm = 60 * wpm_word/wpm_time
+    let wpm = ((60 * wpm_word) / wpm_time) * 5;
     if (sc >= 95) {
-      if(mode.value == "voc")
+      if (mode.value == "voc")
         window.alert("you win and your wpm is " + wpm.toFixed(2));
-      else 
-      window.alert("you win !!");
-    }
-    else {
-      if(mode.value == "voc")
+      else window.alert("you win !!");
+    } else {
+      if (mode.value == "voc")
         window.alert("you lose and your wpm is " + wpm.toFixed(2));
-      else
-        window.alert("you lose !!");
-  }
+      else window.alert("you lose !!");
+    }
     sc = 0;
     for (let i = 0; i < 3; i++) {
       enemySC[i] = 0;
