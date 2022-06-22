@@ -1,0 +1,59 @@
+.app {
+    width: 100%;
+    padding: 20px;
+    border: 1px solid rgb(0, 0, 0);
+    box-sizing: border-box;
+    font-size: 25px;
+    background-color: rgb(227, 227, 228);
+}
+
+button:hover {
+    background-color: rgb(120, 123, 123);
+}
+
+.rand {
+    font-size: 100px;
+    font-weight: 100;
+    color: rgb(0, 0, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.btn {
+    color: rgb(239, 240, 240);
+    font-size: 15px;
+    padding: 10px 10px;
+    background: rgb(80, 78, 78);
+    border: 0 none;
+    border-radius: 5px;
+
+}
+
+.v-line {
+    border-left: thick solid #000;
+    height: 26%;
+    border-color: rgb(120, 19, 19);
+    left: 97%;
+    position: absolute;
+}
+
+#game {
+    background-color: rgb(201, 203, 206);
+
+}
+
+select {
+    font-size: 30px;
+    font-weight: 100;
+    border-color: rgb(120, 19, 19);
+}
+
+#ans {
+    background-color: black;
+    color: azure;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

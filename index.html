@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ch-hang-tw">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./index.css" />
+    <link rel="icon" href="./car.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="./car.ico" type="image/x-icon" />
+    <title>Typing Game</title>
+  </head>
+  <body>
+    <div class="app">
+      <h1>英打練習</h1>
+      模式：<select id="mode">
+        <option value="char">Char</option>
+        <option value="voc">Vocabulary</option>
+      </select>
+      難度：<select id="level">
+        <option value="easy">easy</option>
+        <option value="mid">mid</option>
+        <option value="hard">hard</option>
+        <option value="auto">auto</option>
+      </select>
+      <button id="start" class="btn">開始</button>
+      <button id="reset" class="btn">重新</button>
+      <p>題目:</p>
+      <div id="randalph" class = "rand"></div> 
+      <div id="ans"></div>
+        
+    </div>
+    <div id="game">
+      <div class="v-line"></div>
+      <div id="cars" >
+        <img  src="./car.png" id="car" width="60" height="60" style="position: relative; left: 1%;"/>
+      </div>
+      <div id="cars">
+        <img src="./car_blue.png" id="enemy" width="60" height="60" style="position: relative; left: 1%;"/>
+      </div>
+      <div id="cars">
+        <img src="./car_green.png" id="enemy" width="60" height="60" style="position: relative; left: 1%;"/>
+      </div>
+      <div id="cars">
+        <img src="./car_orange.png" id="enemy" width="60" height="60" style="position: relative; left: 1%;"/>
+      </div>
+    </div>
+    <audio id="wa" src="./WA.mp3"></audio>
+    <script src="./index.js"></script>
+    </body>
+  </body>
+</html>
