@@ -1,19 +1,26 @@
 const randalph = document.getElementById("randalph");
+const next = document.querySelector(".nextRand");
 const btn = document.getElementById("start");
 const reset = document.getElementById("reset");
 const car = document.querySelector("#car");
 const eneCar = document.querySelectorAll("#enemy");
 const level = document.querySelector("#level");
+const mute = document.querySelector("#mute");
 const mode = document.querySelector("#mode");
+const recordList = document.querySelector(".records");
 const yourAns = document.querySelector("#ans");
 const audio = new Audio("WA.mp3");
 var rand = "";
+var nextRand = "";
 var sc = 0;
 var enemySC = [0, 0, 0];
 var myInt, totalTime;
 var wpm_word = 0,
   wpm_time = 0;
+var wpm;
 var ans = "";
+var WIN = false;
+var record = [];
 var Voc_lib = [
   "aback",
   "abaft",
@@ -2484,16 +2491,26 @@ var Voc_lib = [
 
 window.onload = function () {
   btn.addEventListener("click", start);
-  reset.addEventListener("click", function () {
-    location.reload();
-  });
+
+  /* reset.addEventListener("click", gameover); */
 };
+
+function muteMusic() {
+  if (audio.muted) {
+    audio.muted = false;
+    mute.style.background = "#B5B3B3";
+  } else {
+    audio.muted = true;
+    mute.style.background = "#9D9D9D";
+  }
+}
 
 function randTopic(flag) {
   randalph.style.color = "black";
   var character = "";
   if (mode.value == "voc") {
-    character = Voc_lib[Math.floor(Math.random() * Voc_lib.length)];
+    character = nextRand;
+    nextRand = Voc_lib[Math.floor(Math.random() * Voc_lib.length)];
     return character;
   }
   if (flag === "lower") {
@@ -2511,8 +2528,9 @@ function randTopic(flag) {
 
 function render() {
   randalph.innerHTML = `
-    <div>${rand}
+    <div >${rand}
     </div>`;
+  next.innerHTML = nextRand;
   if (mode.value == "voc")
     yourAns.innerHTML = `
       <div>>${ans}
@@ -2524,6 +2542,26 @@ function render() {
   eneCar.forEach(function (enecar, i) {
     enecar.style.left = enemySC[i] + "%";
   });
+}
+function renderRecord() {
+  var tmp = "";
+  record.reverse().forEach((re) => {
+    var levelColor = "",
+      resultColor = "";
+    if (re.level == "hard") levelColor = "red";
+    else if (re.level == "mid") levelColor = "yellow";
+    else if (re.level == "easy") levelColor = "green";
+    else if (re.level == "auto") levelColor = "white";
+    if (re.result == "Win") resultColor = "green";
+    else resultColor = "red";
+    tmp += `<div class = "record">
+    <div>模式:<span style="color:	#4F4F4F"> ${re.mode}</span></div>
+    <div>難度:<span style="color:${levelColor}"> ${re.level}</span></div> 
+    <div><span style="color:${resultColor}"> ${re.result}</span></div><div> wpm:<span style="color:	#4F4F4F">${re.wpm}</span></div> 
+  </div>
+  <hr/>`;
+  });
+  recordList.innerHTML = tmp;
 }
 
 function user(e) {
@@ -2556,9 +2594,14 @@ function user(e) {
 }
 
 function enemy(hard) {
-  if (sc >= 95 || enemySC[0] >= 95 || enemySC[1] >= 95 || enemySC[2] >= 95) {
-    let wpm = (60 * wpm_word) / (wpm_time * 5);
+  var LOSE = false;
+  enemySC.forEach(function (car) {
+    if (car >= 95) LOSE = true;
+  });
+  if (sc >= 95 || LOSE) {
+    wpm = (60 * wpm_word) / (wpm_time * 5);
     if (sc >= 95) {
+      WIN = true;
       if (mode.value == "voc")
         window.alert("you win and your wpm is " + wpm.toFixed(2));
       else window.alert("you win !!");
@@ -2571,7 +2614,7 @@ function enemy(hard) {
     for (let i = 0; i < 3; i++) {
       enemySC[i] = 0;
     }
-    location.reload();
+    gameover(1);
     return;
   }
   if (level.value == "auto" && 40 < hard && hard < 100)
@@ -2609,6 +2652,9 @@ function start() {
     time = 400;
     hard = 60;
   }
+  if (mode.value == "voc") {
+    nextRand = Voc_lib[Math.floor(Math.random() * Voc_lib.length)];
+  }
   rand = randTopic("lower");
   clearInterval(myInt);
   btn.removeEventListener("click", start);
@@ -2617,4 +2663,35 @@ function start() {
     enemy(hard);
   }, time);
   window.addEventListener("keydown", user);
+}
+
+function gameover(over) {
+  if (over) {
+    var tmp = "";
+    if (WIN) tmp = "Win";
+    else tmp = "Lose";
+    record.push({
+      mode: mode.value,
+      level: level.value,
+      result: tmp,
+      wpm: wpm.toFixed(2),
+    });
+  }
+  renderRecord();
+  ans = "";
+  rand = "";
+  nextRand = "";
+  sc = 0;
+  wpm = 0;
+  enemySC = [0, 0, 0];
+  (wpm_word = 0), (wpm_time = 0);
+  clearInterval(myInt);
+  clearInterval(totalTime);
+  yourAns.innerHTML = "";
+  mode.value = "char";
+  mode.disabled = false;
+  level.disabled = false;
+  WIN = false;
+  render();
+  btn.addEventListener("click", start);
 }
