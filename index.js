@@ -2535,6 +2535,9 @@ function render() {
     yourAns.innerHTML = `
       <div>>${ans}
       </div>`;
+  else {
+    yourAns.innerHTML = ``;
+  }
   /* score.innerHTML = `
     得分：${sc}`; */
   var carStr = "";
@@ -2689,7 +2692,6 @@ function gameover(over) {
   clearInterval(myInt);
   clearInterval(totalTime);
   yourAns.innerHTML = "";
-  mode.value = "char";
   mode.disabled = false;
   level.disabled = false;
   WIN = false;
