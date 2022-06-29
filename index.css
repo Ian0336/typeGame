@@ -73,6 +73,9 @@ button {
   flex-wrap:wrap;
   align-content:space-between;
 }
+.re_text{
+  width: 20%;
+}
 button::before, button::after {
   box-sizing: inherit;
   position: absolute;

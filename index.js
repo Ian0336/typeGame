@@ -63,7 +63,7 @@ var Voc_lib = [
   "activity",
   "actor",
   "actually",
-  "ad hoc",
+  "ad-hoc",
   "adamant",
   "adaptable",
   "add",
@@ -2548,7 +2548,7 @@ function render() {
 }
 function renderRecord() {
   var tmp = "";
-  record.reverse().forEach((re) => {
+  record.forEach((re) => {
     var levelColor = "",
       resultColor = "";
     if (re.level == "hard") levelColor = "red";
@@ -2557,14 +2557,14 @@ function renderRecord() {
     else if (re.level == "auto") levelColor = "white";
     if (re.result == "Win") resultColor = "green";
     else resultColor = "red";
-    tmp += `<div class = "record">
-    <div>模式:<span style="color:	#4F4F4F"> ${re.mode}</span></div>
-    <div>難度:<span style="color:${levelColor}"> ${re.level}</span></div> 
-    <div><span style="color:${resultColor}"> ${re.result}</span></div><div> wpm:<span style="color:	#4F4F4F">${re.wpm}</span></div> 
+    tmp =
+      `<div class = "record">
+    <div class = "re_text">模式:<span style="color:	#4F4F4F"> ${re.mode}</span></div>
+    <div class = "re_text">難度:<span style="color:${levelColor}"> ${re.level}</span></div> 
+    <div class = "re_text"><span style="color:${resultColor}"> ${re.result}</span></div><div class = "re_text"> wpm:<span style="color:	#4F4F4F">${re.wpm}</span></div> 
   </div>
-  <hr/>`;
+  <hr/>` + tmp;
   });
-  record.reverse();
   recordList.innerHTML = tmp;
 }
 
