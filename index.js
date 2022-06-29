@@ -2561,6 +2561,7 @@ function renderRecord() {
   </div>
   <hr/>`;
   });
+  record.reverse();
   recordList.innerHTML = tmp;
 }
 
