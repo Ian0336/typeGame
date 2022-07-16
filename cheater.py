@@ -8,7 +8,7 @@ from pykeyboard import *
 import re
 import time
 driver = webdriver.Edge(executable_path="D:\\edgedriver\\msedgedriver")
-driver.maximize_window()
+driver.set_window_size(1552, 893)
 driver.get("https://ian0336.github.io/typeGame/?fbclid=IwAR2W_EpdhQ9ljRGZlIIJlwlADpZwLBRoBD8Ymx_ooHSnFzPvq2ur99umOTc")
 pat = re.compile("[0-9]+")
 
